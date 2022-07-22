@@ -61,6 +61,7 @@ class EncodeToRGBM(bpy.types.Operator):
         # Encode to RGBM
         for i in range(0,num_pixels,4):
             for j in range(3):
+                result_pixel[i+j] **= 1.0 / 2.2  # Linear to gamma
                 result_pixel[i+j] *= 1.0 / 6.0
             result_pixel[i+3] = saturate(max(result_pixel[i], result_pixel[i+1], result_pixel[i+2], 1e-6))
             result_pixel[i+3] = math.ceil(result_pixel[i+3] * 255.0) / 255.0;
